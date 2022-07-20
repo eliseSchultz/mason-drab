@@ -59,6 +59,21 @@ class TicTacToe
       end
     end
 
+    # check forward diagonal
+    #look at @board[0..n][n..0]
+    currSquare = @board[0][@board.length-1]
+    j = @board.length-1
+    for i in 0..@board.length-1
+      if @board[i][j] != currSquare || @board[i][j] == " "
+        #not a winner
+        break
+      end
+      if i == @board.length-1
+        # forward diagonal winner
+        return currSquare
+      end
+      j -= 1
+    end
 
   end
 end
