@@ -75,5 +75,16 @@ class TicTacToe
       j -= 1
     end
 
+    #check unfinished
+    @board.each do |row|
+      row.each do |square|
+        if square == " "
+          return "unfinished"
+        end
+      end
+    end
+
+    return "draw"
+
   end
 end
