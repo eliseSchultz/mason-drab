@@ -4,80 +4,87 @@ class TicTacToe
   end
 
   def winner
-    row1 = @board[0]
-    row2 = @board[1]
-    row3 = @board[2]
 
     # row checks
 
-    if row1[0] == "o" && row1[1] == "o" && row1[2] == "o"
-      return "o"
-    end
-
-    if row2[0] == "o" && row2[1] == "o" && row2[2] == "o"
-      return "o"
-    end
-
-    if row3[0] == "o" && row3[1] == "o" && row3[2] == "o"
-      return "o"
-    end
-
-    if row1[0] == "x" && row1[1] == "x" && row1[2] == "x"
-      return "x"
-    end
-
-    if row2[0] == "x" && row2[1] == "x" && row2[2] == "x"
-      return "x"
-    end
-
-    if row3[0] == "x" && row3[1] == "x" && row3[2] == "x"
-      return "x"
+    @board.each do |row|
+      # row index
+      j = 0
+      # grab first item to compare other squares
+      currSquare = row[0]
+      row.each do |square|
+        if square != currSquare || square == " "
+          # this row is not a winner
+          break
+        end
+        if j == @board.length - 1
+          #row is a winner
+          return currSquare
+        end
+        j += 1
+      end
     end
 
     # column checks
 
-    if row1[0] == "o" && row2[0] == "o" && row3[0] == "o"
-      return "o"
-    end
-
-    if row1[1] == "o" && row2[1] == "o" && row3[1] == "o"
-      return "o"
-    end
-
-    if row1[2] == "o" && row2[2] == "o" && row3[2] == "o"
-      return "o"
-    end
-
-    if row1[0] == "x" && row2[0] == "x" && row3[0] == "x"
-      return "x"
-    end
-
-    if row1[1] == "x" && row2[1] == "x" && row3[1] == "x"
-      return "x"
-    end
-
-    if row1[2] == "x" && row2[2] == "x" && row3[2] == "x"
-      return "x"
+    # row loop
+    for j in 0..@board.length-1
+      currSquare = @board[0][j]
+      #column loop
+      for i in 0..@board.length-1
+        if @board[i][j] != currSquare || @board[i][j] == " "
+          #not a winner
+          break
+        end
+        if i == @board.length-1
+          # column winner
+          return currSquare
+        end
+      end
     end
 
     # diagonal checks
 
-    if row1[0] == "o" && row2[1] == "o" && row3[2] == "o"
-      return "o"
+    # check backward diagonal
+    currSquare = @board[0][0]
+    for i in 0..@board.length-1
+      #look at @board[0..n][0..n]
+      if @board[i][i] != currSquare || @board[i][i] == " "
+        #not a winner
+        break
+      end
+      if i == @board.length-1
+        # backward diagonal winner
+        return currSquare
+      end
     end
 
-    if row1[2] == "o" && row2[1] == "o" && row3[0] == "o"
-      return "o"
+    # check forward diagonal
+    #look at @board[0..n][n..0]
+    currSquare = @board[0][@board.length-1]
+    j = @board.length-1
+    for i in 0..@board.length-1
+      if @board[i][j] != currSquare || @board[i][j] == " "
+        #not a winner
+        break
+      end
+      if i == @board.length-1
+        # forward diagonal winner
+        return currSquare
+      end
+      j -= 1
     end
 
-    if row1[0] == "x" && row2[1] == "x" && row3[2] == "x"
-      return "x"
-    end
-
-    if row1[2] == "x" && row2[1] == "x" && row3[0] == "x"
-      return "x"
+    #check unfinished
+    @board.each do |row|
+      row.each do |square|
+        if square == " "
+          return "unfinished"
+        end
+      end
     end
 
     return "draw"
+
   end
 end
