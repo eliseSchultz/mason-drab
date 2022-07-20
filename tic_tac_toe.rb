@@ -45,20 +45,20 @@ class TicTacToe
 
     # diagonal checks
 
-    # if row1[0] == "o" && row2[1] == "o" && row3[2] == "o"
-    #   return "o"
-    # end
+    # check backward diagonal
+    currSquare = @board[0][0]
+    for i in 0..@board.length-1
+      #look at @board[0..n][0..n]
+      if @board[i][i] != currSquare || @board[i][i] == " "
+        #not a winner
+        break
+      end
+      if i == @board.length-1
+        # backward diagonal winner
+        return currSquare
+      end
+    end
 
-    # if row1[2] == "o" && row2[1] == "o" && row3[0] == "o"
-    #   return "o"
-    # end
 
-    # if row1[0] == "x" && row2[1] == "x" && row3[2] == "x"
-    #   return "x"
-    # end
-
-    # if row1[2] == "x" && row2[1] == "x" && row3[0] == "x"
-    #   return "x"
-    # end
   end
 end
