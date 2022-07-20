@@ -13,7 +13,6 @@ class TicTacToe
       # grab first item to compare other squares
       currSquare = row[0]
       row.each do |square|
-        puts square
         if square != currSquare || square == " "
           # this row is not a winner
           break
@@ -28,6 +27,21 @@ class TicTacToe
 
     # column checks
 
+    # row loop
+    for j in 0..@board.length-1
+      currSquare = @board[0][j]
+      #column loop
+      for i in 0..@board.length-1
+        if @board[i][j] != currSquare || @board[i][j] == " "
+          #not a winner
+          break
+        end
+        if i == @board.length-1
+          # column winner
+          return currSquare
+        end
+      end
+    end
 
     # diagonal checks
 
